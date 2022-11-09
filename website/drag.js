@@ -37,12 +37,16 @@ elements.forEach(element => {
             pos3 = e.clientX;
             pos4 = e.clientY;
             // set the element's new position:
+            elmnt.style.transitionDuration = "0ms";
             elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
             elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            elmnt.style.filter = "drop-shadow(0 0 0.2em)";
         }
 
         function closeDragElement() {
             // stop moving when mouse button is released:
+            elmnt.style.transitionDuration = "125ms";
+            elmnt.style.filter = "none";
             document.onmouseup = null;
             document.onmousemove = null;
         }
