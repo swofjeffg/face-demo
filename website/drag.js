@@ -40,7 +40,7 @@ elements.forEach(element => {
             elmnt.style.transitionDuration = "0ms";
             elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
             elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-            elmnt.style.filter = "drop-shadow(0 0 0.2em)";
+            elmnt.style.filter = "drop-shadow(0 0 0.1em)";
         }
 
         function closeDragElement() {
