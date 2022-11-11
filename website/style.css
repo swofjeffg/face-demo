@@ -40,6 +40,16 @@ body {
     background-color: #fff;
 }
 
+.info-box {
+    width: 20em;
+    height: 35em;
+    position: absolute;
+    top: 40%;
+    left: 1%;
+    border: solid;
+    background-color: #fff;
+}
+
 .draggable {
     position: absolute;
     cursor: move;

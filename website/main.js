@@ -65,6 +65,7 @@ function createFace() {
                         elmnt.style.filter = "none";
                         document.onmouseup = null;
                         document.onmousemove = null;
+                        boundsCheck();
                     }
                 }
 
@@ -78,9 +79,35 @@ function createFace() {
                     element.style.top = getRandomInt(rangeY[0], rangeY[1]) + "%";
                     element.style.left = getRandomInt(rangeX[0], rangeX[1]) + "%";
                 }
-
                 randomPlacement(div);
                 dragElement(div);
             })
         })
+}
+
+function boundsCheck() {
+    const chestCoords = document.querySelector('.chest').getBoundingClientRect();
+    const infoBox = document.querySelector('.info-box')
+    const elements = document.querySelectorAll('.draggable')
+
+    function isInChest(element) {
+        // check whether the center of the image is within the chest
+        elmntCoords = element.getBoundingClientRect();
+        elmntCentreX = (elmntCoords.left + (elmntCoords.right / 2));
+        elmntCentreY = (elmntCoords.top + (elmntCoords.bottom / 2));
+        if (
+            elmntCentreX > chestCoords.left && elmntCentreX < chestCoords.right &&
+            elmntCentreY > chestCoords.top && elmntCentreY < chestCoords.bottom) {
+            return true;
+        }
+        return false;
+    }
+    for (const element of elements) {
+        if (isInChest(element)) {
+            infoBox.style.display = 'block';
+            break;
+        } else {
+            infoBox.style.display = 'none';
+        }
+    }
 }
