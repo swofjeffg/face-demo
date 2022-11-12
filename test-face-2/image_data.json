@@ -22,25 +22,26 @@
         ]
     },
     "relativePos": {
-        "l_eye.png": [
-            -8.5,
-            -124.5
+        "l_eye.png": [-8.5, -124.5,
+            "left eye"
         ],
         "mouth.png": [
             90.0,
-            85.0
+            85.0,
+            "mouth"
         ],
         "nose.png": [
             0.0,
-            0.0
+            0.0,
+            "nose"
         ],
         "r_ear.png": [
-            238.0,
-            -34.0
+            238.0, -34.0,
+            "righ ear"
         ],
         "r_eye.png": [
-            130.5,
-            -128.5
+            130.5, -128.5,
+            "right eye"
         ]
     }
 }
