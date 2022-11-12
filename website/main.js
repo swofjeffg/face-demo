@@ -65,7 +65,7 @@ function createFace() {
                         elmnt.style.filter = "none";
                         document.onmouseup = null;
                         document.onmousemove = null;
-                        boundsCheck();
+                        boundsCheck(entry[1][2]);
                     }
                 }
 
@@ -85,7 +85,7 @@ function createFace() {
         })
 }
 
-function boundsCheck() {
+function boundsCheck(text) {
     const chestCoords = document.querySelector('.chest').getBoundingClientRect();
     const infoBox = document.querySelector('.info-box')
     const elements = document.querySelectorAll('.draggable')
@@ -105,6 +105,7 @@ function boundsCheck() {
     for (const element of elements) {
         if (isInChest(element)) {
             infoBox.style.display = 'block';
+            infoBox.innerText = text;
             break;
         } else {
             infoBox.style.display = 'none';
