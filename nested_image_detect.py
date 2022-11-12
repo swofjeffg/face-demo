@@ -1,15 +1,14 @@
 # script to locate indivdual features and return coordinates
 import cv2  # pip install opencv-python
 import os
-from os import listdir
 import json
 
 METHOD = cv2.TM_SQDIFF_NORMED
-IMAGEDIRECTORY = os.path.realpath('test face 1')
+IMAGEDIRECTORY = os.path.realpath('test-face-2')
 images = {}
 
 # collect and read images
-for image in os.listdir(IMAGEDIRECTORY):
+for image in os.listdir(IMAGEDIRECTORY):    # if you get double backslash error means file doesn't exist
     if (image.endswith('.png')):
         image_file = image
         image_data = cv2.imread(f'{IMAGEDIRECTORY}\{image}')
@@ -41,7 +40,7 @@ if 'full.png' in images.keys():
     
     for image in absolutePos.keys():
         x, y = absolutePos[image]
-        relativeCoords = (x - anchorX), (y - anchorY)
+        relativeCoords = (x - anchorX), (y - anchorY), "description"
         relativePos[image] = relativeCoords
     
     jsonDict['absolutePos'] = absolutePos
