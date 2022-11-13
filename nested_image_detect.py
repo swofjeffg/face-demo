@@ -4,7 +4,7 @@ import os
 import json
 
 METHOD = cv2.TM_SQDIFF_NORMED
-IMAGEDIRECTORY = os.path.realpath('test-face-2')
+IMAGEDIRECTORY = os.path.realpath('test-face-1')
 images = {}
 
 # collect and read images
@@ -33,7 +33,7 @@ if 'full.png' in images.keys():
             # drawing rectangles on full.png
             cv2.rectangle(images['full.png'], (MPx, MPy), (MPx+tcols,MPy+trows),(255,0+(index*45),0+(index*22)),1)
             
-            absolutePos[image] = (MPx+(tcols/2)), (MPy+(trows/2))
+            absolutePos[image] = (MPx), (MPy)
     
     # nose is the "center" of the face
     anchorX, anchorY = absolutePos['nose.png']

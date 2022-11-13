@@ -1,47 +1,51 @@
 {
     "absolutePos": {
         "l_eye.png": [
-            90.0,
-            120.0
+            9,
+            15
         ],
         "mouth.png": [
-            188.5,
-            329.5
+            19,
+            263
         ],
         "nose.png": [
-            98.5,
-            244.5
+            0,
+            176
         ],
         "r_ear.png": [
-            336.5,
-            210.5
+            274,
+            110
         ],
         "r_eye.png": [
-            229.0,
-            116.0
+            147,
+            0
         ]
     },
     "relativePos": {
-        "l_eye.png": [-8.5, -124.5,
-            "left eye"
+        "l_eye.png": [
+            9,
+            -161,
+            "description"
         ],
         "mouth.png": [
-            90.0,
-            85.0,
-            "mouth"
+            19,
+            87,
+            "description"
         ],
         "nose.png": [
-            0.0,
-            0.0,
-            "nose"
+            0,
+            0,
+            "description"
         ],
         "r_ear.png": [
-            238.0, -34.0,
-            "righ ear"
+            274,
+            -66,
+            "description"
         ],
         "r_eye.png": [
-            130.5, -128.5,
-            "right eye"
+            147,
+            -176,
+            "description"
         ]
     }
 }
