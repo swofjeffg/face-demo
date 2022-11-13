@@ -108,18 +108,14 @@ function createFace() {
 
                 function isInPlace(element, info) {
                     // check if elements are in correct spots relative to nose
-                    const variability = [15, 15];
+                    const variability = [30, 30];
                     let relCoords = [info[1][0], info[1][1]];
                     let noseCoords = document.getElementById('nose.png').getBoundingClientRect();
                     let elementCoords = element.getBoundingClientRect();
                     let calculatedX = relCoords[0] + noseCoords.x;
                     let calculatedY = relCoords[1] + noseCoords.y;
-                    console.log(info[1]);
-                    console.log(calculatedX, calculatedY);
-                    console.log(elementCoords.x, elementCoords.y);
                     if (elementCoords.x > (calculatedX - variability[0]) && elementCoords.x < (calculatedX + variability[0]) &&
                         elementCoords.y > (calculatedY - variability[1]) && elementCoords.y < (calculatedY + variability[1])) {
-                        console.log(info[0] + ' is in correct spot')
                         return true;
                     }
                     return false;
@@ -146,8 +142,13 @@ function createFace() {
                         inRightPlace[i] = false;
                     }
                 }
-                console.log(inRightPlace)
-                console.log(inRightPlace.every(bool => bool))
+
+                if (inRightPlace.every(bool => bool)) {
+                    infoBox.style.display = 'block';
+                    infoBox.innerText = "omg you made the face!";
+                } else {
+                    infoBox.style.display = 'none';
+                }
             }
         })
 
