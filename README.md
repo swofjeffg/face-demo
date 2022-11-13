@@ -17,7 +17,7 @@ The nose/center should be named `nose.png`, and the full unsliced image should b
 
 ###### Step 1: Plugging the image into python
 Now that your images are in a folder, you'll need to change the image directory of the script.
-You should look for this: `IMAGEDIRECTORY = os.path.realpath('...')` near the top
+You should look for this: `IMAGEDIRECTORY = os.path.realpath('...')` near the top.
 Change the text inside the single quotes to the name of the folder where your images are stored.
 
 ###### Step 2: Running the python script
