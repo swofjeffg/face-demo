@@ -124,18 +124,6 @@ function createFace() {
                 for (let i = 0; i < elementsDict.length; i++) {
                     let element = elements[i];
                     let elementInfo = elementsDict[i];
-                    if (isInChest(element)) {
-                        infoBox.style.display = 'block';
-                        infoBox.innerText = elementInfo[1][2];
-                        break;
-                    } else {
-                        infoBox.style.display = 'none';
-                    }
-                }
-
-                for (let i = 0; i < elementsDict.length; i++) {
-                    let element = elements[i];
-                    let elementInfo = elementsDict[i];
                     if (isInPlace(element, elementInfo)) {
                         inRightPlace[i] = true;
                     } else {
@@ -148,6 +136,16 @@ function createFace() {
                     infoBox.innerText = "omg you made the face!";
                 } else {
                     infoBox.style.display = 'none';
+                }
+
+                for (let i = 0; i < elementsDict.length; i++) {
+                    let element = elements[i];
+                    let elementInfo = elementsDict[i];
+                    if (isInChest(element)) {
+                        infoBox.style.display = 'block';
+                        infoBox.innerText = elementInfo[1][2];
+                        break;
+                    }
                 }
             }
         })
