@@ -42,9 +42,9 @@ body {
 
 .info-box {
     width: 20em;
-    height: 35em;
+    height: calc(100% - 20em - 14%);
     position: absolute;
-    top: 40%;
+    top: calc(20em + 8%);
     left: 1%;
     border: solid;
     background-color: #fff;
