@@ -6,14 +6,18 @@ function createFace() {
     fetch(source + 'image_data.json')
         .then((response) => response.json())
         .then((json) => {
-            Object.entries(json['relativePos']).forEach((entry) => {
-                const [key, value] = entry;
-                const parent = document.getElementById('container');
-                const div = document.createElement('div');
-                const image = document.createElement('img');
+            elementsDict = Object.entries(json['relativePos'])
+            elementsDict.forEach((entry) => {
+                let [key, value] = entry;
+                let parent = document.getElementById('container');
+                let div = document.createElement('div');
+                let image = document.createElement('img');
+                let chestCoords = document.querySelector('.chest').getBoundingClientRect();
+                let infoBox = document.querySelector('.info-box')
 
                 div.appendChild(image);
                 div.className = 'draggable';
+                div.id = entry[0];
                 div.style.background = 'background: url(' + source + entry[0]
                 ') no-repeat center;'
                 image.src = (source + entry[0]);
@@ -21,7 +25,7 @@ function createFace() {
 
                 // w3schools
                 function dragElement(elmnt) {
-                    var pos1 = 0,
+                    let pos1 = 0,
                         pos2 = 0,
                         pos3 = 0,
                         pos4 = 0;
@@ -65,7 +69,7 @@ function createFace() {
                         elmnt.style.filter = "none";
                         document.onmouseup = null;
                         document.onmousemove = null;
-                        boundsCheck(entry[1][2]);
+                        boundsCheck();
                     }
                 }
 
@@ -82,33 +86,69 @@ function createFace() {
                 randomPlacement(div);
                 dragElement(div);
             })
+
+            function boundsCheck() {
+                let chestCoords = document.querySelector('.chest').getBoundingClientRect();
+                let infoBox = document.querySelector('.info-box')
+                let elements = document.querySelectorAll('.draggable')
+                let inRightPlace = [];
+
+                function isInChest(element) {
+                    // check whether the center of the image is within the chest
+                    elmntCoords = element.getBoundingClientRect();
+                    elmntCentreX = (elmntCoords.left + (elmntCoords.right / 2));
+                    elmntCentreY = (elmntCoords.top + (elmntCoords.bottom / 2));
+                    if (
+                        elmntCentreX > chestCoords.left && elmntCentreX < chestCoords.right &&
+                        elmntCentreY > chestCoords.top && elmntCentreY < chestCoords.bottom) {
+                        return true;
+                    }
+                    return false;
+                }
+
+                function isInPlace(element, info) {
+                    // check if elements are in correct spots relative to nose
+                    const variability = [15, 15];
+                    let relCoords = [info[1][0], info[1][1]];
+                    let noseCoords = document.getElementById('nose.png').getBoundingClientRect();
+                    let elementCoords = element.getBoundingClientRect();
+                    let calculatedX = relCoords[0] + noseCoords.x;
+                    let calculatedY = relCoords[1] + noseCoords.y;
+                    console.log(info[1]);
+                    console.log(calculatedX, calculatedY);
+                    console.log(elementCoords.x, elementCoords.y);
+                    if (elementCoords.x > (calculatedX - variability[0]) && elementCoords.x < (calculatedX + variability[0]) &&
+                        elementCoords.y > (calculatedY - variability[1]) && elementCoords.y < (calculatedY + variability[1])) {
+                        console.log(info[0] + ' is in correct spot')
+                        return true;
+                    }
+                    return false;
+                }
+
+                for (let i = 0; i < elementsDict.length; i++) {
+                    let element = elements[i];
+                    let elementInfo = elementsDict[i];
+                    if (isInChest(element)) {
+                        infoBox.style.display = 'block';
+                        infoBox.innerText = elementInfo[1][2];
+                        break;
+                    } else {
+                        infoBox.style.display = 'none';
+                    }
+                }
+
+                for (let i = 0; i < elementsDict.length; i++) {
+                    let element = elements[i];
+                    let elementInfo = elementsDict[i];
+                    if (isInPlace(element, elementInfo)) {
+                        inRightPlace[i] = true;
+                    } else {
+                        inRightPlace[i] = false;
+                    }
+                }
+                console.log(inRightPlace)
+                console.log(inRightPlace.every(bool => bool))
+            }
         })
-}
 
-function boundsCheck(text) {
-    const chestCoords = document.querySelector('.chest').getBoundingClientRect();
-    const infoBox = document.querySelector('.info-box')
-    const elements = document.querySelectorAll('.draggable')
-
-    function isInChest(element) {
-        // check whether the center of the image is within the chest
-        elmntCoords = element.getBoundingClientRect();
-        elmntCentreX = (elmntCoords.left + (elmntCoords.right / 2));
-        elmntCentreY = (elmntCoords.top + (elmntCoords.bottom / 2));
-        if (
-            elmntCentreX > chestCoords.left && elmntCentreX < chestCoords.right &&
-            elmntCentreY > chestCoords.top && elmntCentreY < chestCoords.bottom) {
-            return true;
-        }
-        return false;
-    }
-    for (const element of elements) {
-        if (isInChest(element)) {
-            infoBox.style.display = 'block';
-            infoBox.innerText = text;
-            break;
-        } else {
-            infoBox.style.display = 'none';
-        }
-    }
 }
